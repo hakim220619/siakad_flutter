@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
-import "dart:io";
 
 class JadwalPelajaran extends StatefulWidget {
   const JadwalPelajaran({super.key});
@@ -31,7 +30,6 @@ class _JadwalPelajaranState extends State<JadwalPelajaran> {
         // print(data);
         setState(() {
           _listsData = data['data'];
-          print(_listsData);
         });
       }
     } catch (e) {
@@ -54,7 +52,7 @@ class _JadwalPelajaranState extends State<JadwalPelajaran> {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.blue[300],
       ),
       body: ListView.builder(
         itemCount: _listsData.length,
@@ -90,56 +88,6 @@ class _JadwalPelajaranState extends State<JadwalPelajaran> {
               ),
             ),
       ),
-    );
-  }
-}
-
-class CardList extends StatefulWidget {
-  final List<String> listData;
-
-  CardList({required this.listData});
-
-  @override
-  State<CardList> createState() => _CardListState();
-}
-
-class _CardListState extends State<CardList> {
-  
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-       
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-            ),
-            itemCount: _listsData.length,
-            itemBuilder: (_, i) => Card(
-              margin: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Text('List ${widget.listData[0]}'),
-                  ),
-                  const Divider(),
-                  ListView.builder(
-                    itemCount: widget.listData.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(widget.listData[index]),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      
     );
   }
 }
