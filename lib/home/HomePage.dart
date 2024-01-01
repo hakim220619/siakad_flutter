@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:siakad/jadwalPelajaran/view.dart';
+
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
 
-  static const appTitle = 'Drawer Demo';
+  static const appTitle = 'Siakad';
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  
+  String counter2 = '265';
+
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -33,25 +37,54 @@ class _MyHomePageState extends State<MyHomePage> {
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
+      'Index 1: Nilai',
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
+      'Index 2: Jadwal',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 3: Chat',
       style: optionStyle,
     ),
   ];
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  String? name;
+  late SharedPreferences profileData;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initial();
+  }
+
+  void initial() async {
+    profileData = await SharedPreferences.getInstance();
+    setState(() {
+      name = profileData.getString('full_name')!;
+      // print(name);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Text(
+          widget.title,
+          style: const TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+      ),
       body: Center(
         child: _widgetOptions[_selectedIndex],
       ),
@@ -63,12 +96,11 @@ class _MyHomePageState extends State<MyHomePage> {
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
+            DrawerHeader(
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text('$name')),
             ListTile(
               title: const Text('Home'),
               selected: _selectedIndex == 0,
@@ -80,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             ListTile(
-              title: const Text('Business'),
+              title: const Text('Nilai'),
               selected: _selectedIndex == 1,
               onTap: () {
                 // Update the state of the app
@@ -90,11 +122,24 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             ListTile(
-              title: const Text('School'),
+              title: const Text('Jadwal Pelajaran'),
               selected: _selectedIndex == 2,
               onTap: () {
                 // Update the state of the app
                 _onItemTapped(2);
+                // Then close the drawer
+                Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const JadwalPelajaran()),
+            );
+              },
+            ),
+            ListTile(
+              title: const Text('Chat'),
+              selected: _selectedIndex == 3,
+              onTap: () {
+                // Update the state of the app
+                _onItemTapped(3);
                 // Then close the drawer
                 Navigator.pop(context);
               },
