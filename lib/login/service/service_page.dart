@@ -13,7 +13,6 @@ class HttpService {
 
   static login(email, password, context) async {
     EasyLoading.show(status: 'loading...');
-    // print('1asdsdasd');
     http.Response response = await _client
         .post(_loginUrl, body: {"email": email, "password": password});
 
