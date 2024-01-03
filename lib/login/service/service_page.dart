@@ -30,7 +30,6 @@ class HttpService {
       await pref.setString("role_id", Users['user']['role_id'].toString());
       await pref.setString("token", Users['token']);
       await pref.setBool("is_login", true);
-      // print(object)
 
       Navigator.pushAndRemoveUntil(
         context,
