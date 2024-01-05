@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:siakad/jadwalPelajaran/view.dart';
+import 'package:siakad/nilai/view.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -118,7 +119,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 // Update the state of the app
                 _onItemTapped(1);
                 // Then close the drawer
-                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const NilaiPage()));
               },
             ),
             ListTile(
@@ -129,9 +133,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 _onItemTapped(2);
                 // Then close the drawer
                 Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const JadwalPelajaran()),
-            );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const JadwalPelajaran()),
+                );
               },
             ),
             ListTile(

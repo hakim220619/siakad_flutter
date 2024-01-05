@@ -9,7 +9,7 @@ import 'package:siakad/home/HomePage.dart';
 class HttpService {
   static final _client = http.Client();
   
-  static final _loginUrl = Uri.parse('http://192.168.63.33:8080/api/login');
+  static final _loginUrl = Uri.parse('http://192.168.0.111:8080/api/login');
 
   static login(email, password, context) async {
     EasyLoading.show(status: 'loading...');

@@ -39,6 +39,15 @@ dependencies:
   http: ^1.1.2
   flutter_easyloading: ^3.0.5
   flutter_dotenv: ^5.1.0
+  file_picker: ^6.1.1
+  flutter_chat_types: ^3.6.2
+  flutter_chat_ui: ^1.6.10
+  image_picker: ^1.0.6
+  mime: ^1.0.4
+  open_filex: ^4.3.4
+  intl: ^0.19.0
+  path_provider: ^2.1.1
+  uuid: ^4.2.2
 
 dev_dependencies:
   flutter_test:

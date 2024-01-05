@@ -19,7 +19,7 @@ class _JadwalPelajaranState extends State<JadwalPelajaran> {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       var token = preferences.getString('token');
       var url = Uri.parse(
-          'http://192.168.63.33:8080/api/jadwal?id_kelas=1&id_siswa=15');
+          'http://192.168.0.111:8080/api/jadwal?id_kelas=1&id_siswa=15');
       final response = await http.get(url, headers: {
         "Accept": "application/json",
         "Authorization": "Bearer $token",
